@@ -1,5 +1,6 @@
 /** @odoo-module **/
 
+import { registry } from "@web/core/registry";
 import { Component, useState, onMounted } from "@odoo/owl";
 import { rpc } from "@web/core/network/rpc";
 
@@ -88,3 +89,4 @@ export class FlowerList extends Component {
 }
 
 FlowerList.template = "sally_flowers.FlowerList";
+registry.category("actions").add("sally_flowers.FlowerList", FlowerList);

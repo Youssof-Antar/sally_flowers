@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="sally_flowers.FlowerAddOnsPopup" owl="1">
+        <Dialog title.translate="Additional Information">
+            <div class="popup-content">
+                <!-- Dynamic list of add-ons -->
+                <div class="addons-list">
+                    <t t-foreach="state.addons" t-as="addon" t-key="addon.id">
+                        <div class="addon-item" style="display:flex; align-items:center; gap:8px; margin:6px 0;">
+                            <input 
+                                type="checkbox" 
+                                t-att-id="'addon-checkbox-' + addon.id"
+                                t-att-checked="addon.selected"
+                                t-on-change="() => this.toggleAddon(addon.id)"
+                            />
+                            <label t-att-for="'addon-checkbox-' + addon.id" style="flex:1; cursor:pointer;">
+                                <div><t t-esc="addon.name"/></div>
+                                <div style="font-size:0.9em; opacity:0.8;">
+                                    + <t t-esc="addon.price.toFixed(2)"/>
+                                </div>
+                            </label>
+                            <t t-if="addon.is_custom">
+                                <span style="font-size:0.7em; color:#999;">(custom)</span>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+
+                <hr style="margin:10px 0;" />
+
+                <!-- Custom add-on form -->
+                <div class="custom-addon-form" style="display:flex; gap:6px; align-items:center;">
+                    <input 
+                        type="text" 
+                        placeholder="Custom add-on name"
+                        style="flex:1;"
+                        t-model="state.customName"
+                    />
+                    <input 
+                        type="number" 
+                        step="0.01" 
+                        placeholder="Price"
+                        style="width:80px;"
+                        t-model.number="state.customPrice"
+                    />
+                    <button 
+                        class="btn btn-sm btn-primary"
+                        t-on-click="addCustomAddon"
+                        t-att-disabled="(!state.customName or state.customPrice lt 0) ? 'disabled' : null"
+                    >
+                        ➕
+                    </button>
+                </div>
+            </div>
+
+       
+        </Dialog>
+    </t>
+</templates>

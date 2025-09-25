@@ -1,19 +1,30 @@
 <odoo>
-
-
     <!-- Root menu -->
     <menuitem id="menu_sally_flowers_root" name="Sally Flowers" sequence="10" />
 
-    <!-- Client action -->
+    <!-- Client action: Flower List -->
     <record id="action_sally_flowers" model="ir.actions.client">
         <field name="name">Flower List</field>
         <field name="tag">sally_flowers.FlowerList</field>
     </record>
 
-    <!-- Submenu linked to the client action -->
+    <!-- Submenu: Flower List -->
     <menuitem id="menu_sally_flowers_list"
         name="Flower List"
         parent="menu_sally_flowers_root"
         action="action_sally_flowers"
         sequence="1" />
+
+    <!-- Client action: Flower Add-Ons -->
+    <record id="action_sally_addons" model="ir.actions.client">
+        <field name="name">Flower Add-Ons</field>
+        <field name="tag">sally_flowers.FlowerAddOnList</field>
+    </record>
+
+    <!-- Submenu: Flower Add-Ons -->
+    <menuitem id="menu_sally_addons_list"
+        name="Flower Add-Ons"
+        parent="menu_sally_flowers_root"
+        action="action_sally_addons"
+        sequence="2" />
 </odoo>
