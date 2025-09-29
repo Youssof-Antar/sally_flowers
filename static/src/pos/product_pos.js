@@ -54,15 +54,22 @@ patch(PosStore.prototype, {
       });
 
       if (rpcProduct[0].is_flower) {
+
         if (
-          rpcProduct[0].last_watered_date &&
-          rpcProduct[0].watering_frequency
+          rpcProduct[0].last_watered_date != undefined &&
+          rpcProduct[0].watering_frequency >= 0
         ) {
-          const lastWatered = DateTime.fromISO(rpcProduct[0].last_watered_date);
+          const lastWatered = luxon.DateTime.fromISO(
+            rpcProduct[0].last_watered_date
+          );
+          console.log("Last Watered: ", lastWatered);
+          
           const wateringDue = lastWatered.plus({
             days: rpcProduct[0].watering_frequency,
           });
-          const today = DateTime.local();
+          console.log("Watering Due: ", wateringDue);
+
+          const today = luxon.DateTime.local();
 
           if (today.startOf("day") > wateringDue.startOf("day")) {
             needsWatering = true;
