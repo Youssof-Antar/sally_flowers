@@ -8,7 +8,7 @@
         <t t-log="props.slots['product-name']['__ctx']['scope']['line']['addons']"/>
         <div class="mt-1">
             <t t-foreach="props.slots['product-name']['__ctx']['scope']['line']['addons']" t-as="addon" t-key="addon.id">
-                - <t t-esc="addon.name"/></t>
+                - <t t-out="addon.name"/></t>
             </div>
     </xpath>
     </t>

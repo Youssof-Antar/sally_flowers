@@ -1,6 +1,7 @@
 import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product_screen";
 import { PosStore } from "@point_of_sale/app/store/pos_store";
 import { patch } from "@web/core/utils/patch";
+import { rpc } from "@web/core/network/rpc";
 import { ask } from "@point_of_sale/app/store/make_awaitable_dialog";
 
 patch(ProductScreen.prototype, {
@@ -32,11 +33,34 @@ patch(PosStore.prototype, {
 
     for (const line of currentOrder.get_orderlines()) {
       const product = line.get_product();
-      if (product.is_flower) {
-        if (product.last_watered_date && product.watering_frequency) {
-          const lastWatered = DateTime.fromISO(product.last_watered_date);
+      const rpcProduct = await rpc("/web/dataset/call_kw", {
+        model: "product.product",
+        method: "search_read",
+        args: [
+          [
+            ["is_flower", "=", true],
+            ["id", "=", product.id],
+          ],
+        ],
+        kwargs: {
+          fields: [
+            "id",
+            "is_flower",
+            "last_watered_date",
+            "watering_frequency",
+            "last_watered_date",
+          ],
+        },
+      });
+
+      if (rpcProduct[0].is_flower) {
+        if (
+          rpcProduct[0].last_watered_date &&
+          rpcProduct[0].watering_frequency
+        ) {
+          const lastWatered = DateTime.fromISO(rpcProduct[0].last_watered_date);
           const wateringDue = lastWatered.plus({
-            days: product.watering_frequency,
+            days: rpcProduct[0].watering_frequency,
           });
           const today = DateTime.local();
 
@@ -44,16 +68,16 @@ patch(PosStore.prototype, {
             needsWatering = true;
             break;
           }
+        } else {
+          needsWatering = true;
         }
       }
     }
 
     if (needsWatering) {
-      const { confirmed } = await this.popup.show(WateringWarningPopup, {
-        title: this.env._t("Flower Warning"),
-        body: this.env._t(
-          "Some flowers in this order are past due for watering. Please inform the customer to water them soon to avoid wilting."
-        ),
+      const { confirmed } = await ask(this.dialog, {
+        title: "Flower Warning",
+        body: "Some flowers in this order are past due for watering. Please inform the customer to water them soon to avoid wilting.",
       });
 
       if (!confirmed) {

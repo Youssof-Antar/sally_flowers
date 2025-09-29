@@ -5,30 +5,10 @@
             <div class="popup-content">
                 <!-- Dynamic list of add-ons -->
                 <div class="addons-list">
-                    <t t-foreach="state.addons" t-as="addon" t-key="addon.id">
-                        <div class="addon-item" style="display:flex; align-items:center; gap:8px; margin:6px 0;">
-                            <input 
-                                type="checkbox" 
-                                t-att-id="'addon-checkbox-' + addon.id"
-                                t-att-checked="addon.selected"
-                                t-on-change="() => this.toggleAddon(addon.id)"
-                            />
-                            <label t-att-for="'addon-checkbox-' + addon.id" style="flex:1; cursor:pointer;">
-                                <div><t t-esc="addon.name"/></div>
-                                <div style="font-size:0.9em; opacity:0.8;">
-                                    + <t t-esc="addon.price.toFixed(2)"/>
-                                </div>
-                            </label>
-                            <t t-if="addon.is_custom">
-                                <span style="font-size:0.7em; color:#999;">(custom)</span>
-                            </t>
-                        </div>
-                    </t>
+                    <AddonsList addons="state.addons"/>
                 </div>
 
                 <hr style="margin:10px 0;" />
-
-                <!-- Custom add-on form -->
                 <div class="custom-addon-form" style="display:flex; gap:6px; align-items:center;">
                     <input 
                         type="text" 

@@ -9,13 +9,13 @@
             <div class="card shadow-sm border-0 mb-3">
                 <div class="card-body text-center">
                     <h3 class="card-title fw-bold mb-2">
-                        <t t-esc="props.product.display_name"/>
+                        <t t-out="props.product.display_name"/>
                     </h3>
                     <h5 class="text-success fw-semibold mb-1">
-                        $<t t-esc="props.product.lst_price"/>
+                        $<t t-out="props.product.lst_price"/>
                     </h5>
                     <p class="text-muted small mb-0">
-                        <t t-esc="props.product.qty_available"/> in stock
+                        <t t-out="props.product.qty_available"/> in stock
                     </p>
                 </div>
             </div>
@@ -29,23 +29,23 @@
                     <div class="card-body">
                         <p class="mb-2">
                             💧 Water every 
-                            <span class="fw-bold"><t t-esc="props.product.watering_frequency"/></span> days
+                            <span class="fw-bold"><t t-out="props.product.watering_frequency"/></span> days
                         </p>
                         <p class="mb-2">
                             💦 Water amount: 
-                            <span class="fw-bold"><t t-esc="props.product.watering_amount"/></span> ml
+                            <span class="fw-bold"><t t-out="props.product.watering_amount"/></span> ml
                         </p>
                         <t t-if="props.product.scientific_name">
                             <p class="mb-2 text-muted fst-italic">
                                 Scientific Name: 
-                                <span class="fw-semibold text-dark"><t t-esc="props.product.scientific_name"/></span>
+                                <span class="fw-semibold text-dark"><t t-out="props.product.scientific_name"/></span>
                             </p>
                         </t>
                         <t t-if="props.product.season_start and props.product.season_end">
                             <p class="mb-0">
                                 🌱 Season: 
-                                <span class="fw-semibold"><t t-esc="props.product.season_start"/></span> →
-                                <span class="fw-semibold"><t t-esc="props.product.season_end"/></span>
+                                <span class="fw-semibold"><t t-out="props.product.season_start"/></span> →
+                                <span class="fw-semibold"><t t-out="props.product.season_end"/></span>
                             </p>
                         </t>
                     </div>
@@ -59,7 +59,7 @@
                         📝 Description
                     </div>
                     <div class="card-body">
-                        <p class="mb-0"><t t-esc="props.product.description"/></p>
+                        <p class="mb-0"><t t-out="props.product.description"/></p>
                     </div>
                 </div>
             </t>

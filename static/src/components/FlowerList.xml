@@ -57,16 +57,16 @@
             <t t-foreach="state.flowers" t-as="flower" t-key="flower.id">
                 <li class="list-group-item mb-3 shadow-sm rounded-3">
                     <h5 class="fw-bold mb-1 text-dark">
-                        <t t-esc="flower.common_name" />
+                        <t t-out="flower.common_name" />
                     </h5>
                     <p class="fst-italic text-secondary mb-1">
-                        <t t-esc="flower.scientific_name" />
+                        <t t-out="flower.scientific_name" />
                     </p>
                     <p class="text-primary fw-semibold mb-1">💧 Water every <t
-                            t-esc="flower.watering_frequency" /> days — <t
-                            t-esc="flower.watering_amount" /> ml</p>
-                    <p class="text-muted small">🌱 Season: <t t-esc="flower.season_start" /> → <t
-                            t-esc="flower.season_end" /></p>
+                            t-out="flower.watering_frequency" /> days — <t
+                            t-out="flower.watering_amount" /> ml</p>
+                    <p class="text-muted small">🌱 Season: <t t-out="flower.season_start" /> → <t
+                            t-out="flower.season_end" /></p>
                 </li>
             </t>
         </ul>

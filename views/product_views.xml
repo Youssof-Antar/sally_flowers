@@ -17,6 +17,7 @@
                         <group>
                             <field name="watering_frequency" string="Watering Frequency (days)" />
                             <field name="watering_amount" string="Watering Amount (ml)" />
+                            <field name="last_watered_date" string="Last watered Date" />
                         </group>
                         <group>
                             <field name="season_start" string="Season Start" />

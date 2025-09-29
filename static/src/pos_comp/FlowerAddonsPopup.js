@@ -3,10 +3,11 @@ import { useState, Component, onMounted } from "@odoo/owl";
 import { usePos } from "@point_of_sale/app/store/pos_hook";
 import { Dialog } from "@web/core/dialog/dialog";
 import { rpc } from "@web/core/network/rpc";
+import { AddonsList } from "../addons/AddonsList";
 
 export class FlowerAddOnsPopup extends Component {
   static template = "sally_flowers.FlowerAddOnsPopup";
-  static components = { Dialog };
+  static components = { Dialog, AddonsList };
 
   setup() {
     this.pos = usePos();
@@ -75,7 +76,8 @@ export class FlowerAddOnsPopup extends Component {
   }
 
   toggleAddon(addonId) {
-    const addon = this.state.addons.find((a) => a.id === addonId);
+    const addon = this.addons.find((a) => a.id === addonId);
+
     if (addon) {
       const orderline = this.pos.get_order().get_selected_orderline();
       if (orderline) {
