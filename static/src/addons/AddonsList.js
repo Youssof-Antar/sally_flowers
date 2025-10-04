@@ -1,9 +1,10 @@
+/** @odoo-module */
+
 import { Component } from "@odoo/owl";
 import { AddonsItem } from "./AddonsItem";
 import { usePos } from "@point_of_sale/app/store/pos_hook";
 
 export class AddonsList extends Component {
-  static template = "sally_flowers.AddonsList";
   static components = { AddonsItem };
   static props = {
     addons: {
@@ -17,7 +18,6 @@ export class AddonsList extends Component {
   }
 
   toggleAddon(addonId) {
-
     const addon = this.props.addons.find((a) => a.id === addonId);
 
     if (addon) {
@@ -33,3 +33,6 @@ export class AddonsList extends Component {
     }
   }
 }
+
+AddonsList.template = "sally_flowers.AddonsList";
+registry.category("actions").add("sally_flowers.AddonsList", AddonsList);

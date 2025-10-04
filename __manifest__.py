@@ -7,9 +7,8 @@
     "depends": ["base", "web", "product", "point_of_sale"],
     "assets": {
         "web.assets_backend": [
-            "sally_flowers/static/src/**/*.js",
             "sally_flowers/static/src/**/*.xml",
-
+            "sally_flowers/static/src/**/*.js",
         ],
         'point_of_sale._assets_pos': [
             "sally_flowers/static/src/**/*.xml",
