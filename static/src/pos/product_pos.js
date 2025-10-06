@@ -6,6 +6,7 @@ import { ask } from "@point_of_sale/app/store/make_awaitable_dialog";
 
 patch(ProductScreen.prototype, {
   get products() {
+
     const { limit_categories, iface_available_categ_ids } = this.pos.config;
     if (limit_categories && iface_available_categ_ids.length > 0) {
       const productIds = new Set([]);
@@ -54,7 +55,6 @@ patch(PosStore.prototype, {
       });
 
       if (rpcProduct[0].is_flower) {
-
         if (
           rpcProduct[0].last_watered_date != undefined &&
           rpcProduct[0].watering_frequency >= 0
@@ -62,12 +62,10 @@ patch(PosStore.prototype, {
           const lastWatered = luxon.DateTime.fromISO(
             rpcProduct[0].last_watered_date
           );
-          console.log("Last Watered: ", lastWatered);
-          
+
           const wateringDue = lastWatered.plus({
             days: rpcProduct[0].watering_frequency,
           });
-          console.log("Watering Due: ", wateringDue);
 
           const today = luxon.DateTime.local();
 

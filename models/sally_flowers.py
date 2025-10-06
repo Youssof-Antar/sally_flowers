@@ -31,13 +31,36 @@ class PosSession(models.Model):
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    is_flower = fields.Boolean("Is Flower")
-    watering_frequency = fields.Integer(string="Watering Frequency (days)")
-    watering_amount = fields.Float(string="Watering Amount (ml)")
-    # last_watered_date = fields.Date(string="Last Watered Date")
-    scientific_name = fields.Char(string="Scientific Name")
-    season_start = fields.Date(string="Season Start")
-    season_end = fields.Date(string="Season End")
+    is_flower = fields.Boolean(
+        "Is Flower",
+        related='product_tmpl_id.is_flower',
+        readonly=False, # Allows writing on the variant, which updates the template
+    )
+    watering_frequency = fields.Integer(
+        string="Watering Frequency (days)",
+        related='product_tmpl_id.watering_frequency',
+        readonly=False,
+    )
+    watering_amount = fields.Float(
+        string="Watering Amount (ml)",
+        related='product_tmpl_id.watering_amount',
+        readonly=False,
+    )
+    scientific_name = fields.Char(
+        string="Scientific Name",
+        related='product_tmpl_id.scientific_name',
+        readonly=False,
+    )
+    season_start = fields.Date(
+        string="Season Start",
+        related='product_tmpl_id.season_start',
+        readonly=False,
+    )
+    season_end = fields.Date(
+        string="Season End",
+        related='product_tmpl_id.season_end',
+        readonly=False,
+    )
 
     @api.model
     def _load_pos_data_domain(self, data):
